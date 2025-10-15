@@ -1,4 +1,5 @@
 from constants import *
+from player import Player
 import pygame
 
 def main():
@@ -11,6 +12,9 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
+    #player
+    player = Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
+
     #game loop
     while True:
         #handling
@@ -19,8 +23,13 @@ def main():
                 return
 
 
+        #controls
+        player.update(dt)
+
+
         #display
-        screen.fill("black")
+        screen.fill("black")   
+        player.draw(screen) 
 
         pygame.display.flip()
 
