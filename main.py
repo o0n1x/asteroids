@@ -51,6 +51,13 @@ def main():
 
         pygame.display.flip()
 
+        #game logic
+
+        for asteroid in asteroids:
+            if player.collision(asteroid):
+                print("Game over!")
+                return
+
 
 if __name__ == "__main__":
     main()
