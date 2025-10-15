@@ -1,5 +1,7 @@
 from constants import *
 from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 import pygame
 
 def main():
@@ -15,13 +17,16 @@ def main():
     #groups
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
 
+    AsteroidField.containers = (updatable)
+    Asteroid.containers = (asteroids,updatable,drawable)
     Player.containers = (updatable,drawable)
 
     
     #player
     player = Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
-
+    asteroidfield = AsteroidField()
 
     #game loop
     while True:
@@ -30,6 +35,9 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
+        
+        #deltatime
+        dt = clock.tick(60) / 1000.0
 
         #controls
         updatable.update(dt)
@@ -43,8 +51,6 @@ def main():
 
         pygame.display.flip()
 
-        #deltatime
-        dt = clock.tick(60)
 
 if __name__ == "__main__":
     main()
